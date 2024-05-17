@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+
+        li {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            font-family: 'Papyrus', fantasy;
+            color: #F52887;
+        }
+
+        body {
+            background-image: url('bg.png');
+        }
+
+        .box {
+            padding-top: 30px;
+            padding-bottom:40px;
+            width: 400px;
+            height: auto;
+            background-image: url('note.jpg');
+            margin: 50px;
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin-left: 400px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        .todo:has(.checkbox:checked) {
+            color: red;
+            text-decoration: line-through 1.5px;
+        }
+    </style>
+</head>
+<body style="background:url('bg.png')">
+  <div class="nav">
+    <ul STYLE="background:black">
+        <li style="display:inline;align:left"><a href="tolist.html" style="text-decoration:none;color:white">Home&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a></li>
+       
+    </ul>
+</div>
+    <div class="box">
+        <h3>TO DO LIST</h3>
+        <input type="text" id="taskInput" placeholder="New task...">
+        <button onclick="addTask()" style="color:#F52887;border:solid">Add</button>
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+    function addTask() {
+        var taskInput = document.getElementById("taskInput");
+        var taskList = document.getElementById("taskList");
+
+        var taskText = taskInput.value.trim();
+        if (taskText === "") {
+            alert("Please enter a task!");
+            return;
+        }
+
+        var li = document.createElement("li");
+        var checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "checkbox";
+        checkbox.addEventListener("change", function () {
+            if (this.checked) {
+                taskTextNode.style.textDecoration = "line-through";
+                taskTextNode.style.color = "grey";
+            } else {
+                taskTextNode.style.textDecoration = "none";
+            }
+        });
+        li.appendChild(checkbox);
+
+        var taskTextNode = document.createElement("span");
+        taskTextNode.textContent = taskText;
+        li.appendChild(taskTextNode);
+
+        taskList.appendChild(li);
+
+        taskInput.value = "";
+    }
+</script>
+
+</body>
+</html>
